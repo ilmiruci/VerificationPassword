@@ -13,10 +13,7 @@ def main():
 
     user_password = input("Введите пароль: ")
 
-    tools.check_passw(user_password)
-
-
-
+    tools.check_password(user_password)
 
 
 if __name__ == "__main__":

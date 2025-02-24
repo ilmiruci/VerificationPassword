@@ -1,18 +1,25 @@
-def check_passw(text):
-    latin_alphabet = ["A", "B", "C", "D", "E", "F"]
+import string  # Удерживать CTRL + Left Click
 
-    errors = []
+# TODO: Использование string
+POSSIBLE_CHARS: str = string.ascii_letters + string.digits + "_"
 
-    if not text[0].isupper() :
+print(POSSIBLE_CHARS)
+
+
+def check_password(text: str) -> None:
+    errors: list[str] = []
+
+    # Пароль должен начинаться с заглавной буквы
+    if not text[0].isupper():
         errors.append("Пароль должен начинаться с заглавной буквы.")
 
-    # Если символа нет в алфавите, то выдать ошибку.
-    # ПРОБЛЕМА: при каждом сравнении символа выдает текст ошибки.
-    # В качестве решения можно текст ошибки записывать на одну и туже позицию(индекс) в списке.
-    for ch in text:
-        if ch.upper() not in latin_alphabet:
-            print("Пароль должен состоять только из латинских букв, цифр и символа нижнего подчёркивания (_).")
+    # Пароль должен заканчиваться только латинской буквой или цифрой.
+
+    for char in text:
+        if char not in POSSIBLE_CHARS:
+            print("Пароль должен состоять только из латинских букв, "
+                  "цифр и символа нижнего подчёркивания (_).")
             break
 
-    for i in errors:
-        print(i)
+    for error in errors:
+        print(error)
