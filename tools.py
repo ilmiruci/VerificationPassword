@@ -14,10 +14,6 @@ def check_password(text: str) -> str | bool:
     """
     errors: list[str] = []
 
-    # [Проверка пароля] Пароль должен начинаться с заглавной буквы
-    if not text[0].isupper():
-        errors.append("Пароль должен начинаться с заглавной буквы.")
-
     # [Проверка пароля] Пароль должен состоять только из латинских букв, цифр и
     # символа нижнего подчёркивания (_)
     for char in text:
@@ -25,13 +21,14 @@ def check_password(text: str) -> str | bool:
             errors.append("Пароль должен состоять только из латинских букв, "
                           "цифр и символа нижнего подчёркивания (_).")
             break
-
+    # [Проверка пароля] Пароль должен начинаться с заглавной буквы
+    if not text[0].isupper():
+        errors.append("Пароль должен начинаться с заглавной буквы.")
     # [Проверка пароля] Пароль должен заканчиваться только латинской буквой или цифрой.
-    if text[-1] not in string.ascii_letters + string.digits:
+    elif text[-1] not in string.ascii_letters + string.digits:
         errors.append("Пароль должен заканчиваться только латинской буквой или цифрой.")
-
     # [Проверка пароля] Минимальная длина пароля — 12 символов, максимальная — 32 символа.
-    if len(text) < 12 or len(text) > 32:
+    elif len(text) < 12 or len(text) > 32:
         errors.append("Минимальная длина пароля — 12 символов, максимальная — 32 символа.")
 
     # Вывод ошибок на экран
@@ -50,7 +47,6 @@ def write_password(user_password):
     """
     Запись валидного пароля в файл
     :param user_password: Пользовательский пароль
-    :return: none
     """
     valid_passwords = open("valid_passwords.txt", "a")
     valid_passwords.write(user_password + "\n")
