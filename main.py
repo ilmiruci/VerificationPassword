@@ -1,17 +1,25 @@
 import tools
 
 
-def main():
+def check_password() -> None:
     print("Программа проверки пароля\n"
           "Введите пароль и получите ответ\n")
+    errors: list[str] = []
 
+    text: str = input("Введите пароль: ")
 
-    user_password = input("Введите пароль: ")
+    tools.is_possible_chars(text, errors)
+    tools.is_first_char_upper(text, errors)
+    tools.is_last_char_alpha_num(text, errors)
+    tools.check_length(text, errors)
 
-    # Записываем пароль в файл если пароль прошел проверку
-    if tools.check_password(user_password):
-        tools.write_password(user_password)
+    if errors:
+        print("Пароль несоответствует требованиям!")
+        print(*errors, sep="\n")
+    else:
+        print("Пароль принят!")
+        tools.write_password("Абвгед_234паыва")
 
 
 if __name__ == "__main__":
-    main()
+    check_password()
